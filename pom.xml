@@ -21,6 +21,10 @@
             <name>Francois Robert</name>
             <email>francois.robert@shipstone.org</email>
             <url>http://www.shipstone.org</url>
+            <timezone>Europe/Paris</timezone>
+            <roles>
+                <role>Developer</role>
+            </roles>
         </developer>
     </developers>
 
@@ -37,6 +41,8 @@
         <swagger.version>1.5.8-SNAPSHOT</swagger.version>
         <swagger-ui.version>2.1.4</swagger-ui.version>
         <rewrite.version>2.0.12.FINAL</rewrite.version>
+        <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
+        <destDir>${project.build.outputDirectory}</destDir>
     </properties>
 
     <dependencies>
