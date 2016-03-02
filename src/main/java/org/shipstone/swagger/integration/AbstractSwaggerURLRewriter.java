@@ -64,25 +64,23 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   @Override
   public Configuration getConfiguration(ServletContext servletContext) {
     swaggerConfiguration(servletContext.getContextPath());
+    swaggerCoreConfiguration();
     if (active) {
       return ConfigurationBuilder.begin()
           .addRule()
           .when(
               Direction.isInbound()
                   .and(
-                      Path.matches(apiDocPath)
+                      Path.matches(apiDocPath + "/")
                   )
                   .or(
                       Path.matches(apiDocPath + "/index.html")
-                  )
-                  .or(
-                      Path.matches(apiDocPath + "/")
                   )
           )
           .perform(
               Lifecycle.abort()
                   .and(
-                      StreamResources.from("api-docs/index.html", "@#swaggerApiJsonPath#@", basePath + restApplicationRoot + "/")
+                      StreamResources.from("inside-docs/index.html", "@#swaggerApiJsonPath#@", basePath + restApplicationRoot + "/")
                   )
                   .and(
                       Log.message(Logger.Level.INFO, "Client requested index - Stream from resources")
@@ -92,13 +90,13 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
           .when(
               Direction.isInbound()
                   .and(
-                      Path.matches(apiDocPath + "{path}")
+                      Path.matches(apiDocPath + "/{path}")
                   )
           )
           .perform(
-              Forward.to("/webjars/swagger-ui/2.1.4/{path}")
+              Forward.to("/swagger-ui-integration/{path}")
                   .and(
-                      Log.message(Logger.Level.INFO, "Client requested path: {path} - Forward to /webjars/swagger-ui/2.1.4/{path}")
+                      Log.message(Logger.Level.INFO, "Client requested path: {path} - Forward to /swagger-ui-integration/{path}")
                   )
           )
           .where("path").matches(".*")
@@ -158,7 +156,7 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   private void swaggerCoreConfiguration() {
     BeanConfig beanConfig = new BeanConfig();
     beanConfig.setSchemes(new String[]{"http", "https"});
-    beanConfig.setHost("localhost:8080" + basePath);
+    beanConfig.setHost("localhost:8080");
     beanConfig.setBasePath(basePath + restApplicationRoot);
     beanConfig.setResourcePackage(resourcePackage);
     beanConfig.setScan(true);

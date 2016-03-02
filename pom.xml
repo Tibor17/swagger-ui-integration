@@ -6,7 +6,7 @@
 
     <groupId>org.shipstone.swagger</groupId>
     <artifactId>swagger-ui-integration</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <licenses>
@@ -42,7 +42,7 @@
         <swagger-ui.version>2.1.4</swagger-ui.version>
         <rewrite.version>2.0.12.FINAL</rewrite.version>
         <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
-        <destDir>${project.build.outputDirectory}</destDir>
+        <destDir>${project.build.outputDirectory}/META-INF/resources/${project.artifactId}</destDir>
     </properties>
 
     <dependencies>
@@ -56,11 +56,6 @@
             <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
             <version>${javaee.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>swagger-ui</artifactId>
-            <version>${swagger-ui.version}</version>
         </dependency>
         <dependency>
             <groupId>org.ocpsoft.rewrite</groupId>
@@ -77,6 +72,46 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>download-single</goal>
+                        </goals>
+                        <configuration>
+                            <url>${upstream.url}</url>
+                            <fromFile>v2.1.8-M1.zip</fromFile>
+                            <toFile>${project.basedir}/temp/swagger-ui-dist.zip</toFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <unzip src="${project.basedir}/temp/swagger-ui-dist.zip"
+                                       dest="${project.basedir}/temp/ui/"/>
+                                <copy todir="${destDir}">
+                                    <fileset dir="${project.basedir}/temp/ui/swagger-ui-2.1.8-M1/dist/" includes="**/*" />
+                                </copy>
+                                <delete dir="${project.basedir}/temp" includeemptydirs="true"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
