@@ -26,7 +26,6 @@ public class AbstractSwaggerURLRewriterTest {
     assertEquals(DEFAULT_API_DOC_PATH, defaultSwaggerConfiguration.getApiDocPath());
     assertTrue(defaultSwaggerConfiguration.isActive());
     assertEquals(EMPTY, defaultSwaggerConfiguration.getSystemSwaggerUIProperties());
-//    assertEquals(DEFAULT_SYSTEM_SWAGGERUI_PROPERTIES, defaultSwaggerConfiguration.sys);
   }
 
   @Test
@@ -49,7 +48,6 @@ public class AbstractSwaggerURLRewriterTest {
     assertEquals("systemUIConfig.properties", swaggerConfiguration.getSystemSwaggerUIProperties());
     assertEquals("/systemSwaggerApiDocPath", swaggerConfiguration.getApiDocPath());
     assertFalse(swaggerConfiguration.isActive());
-//    assertEquals(DEFAULT_SYSTEM_SWAGGERUI_PROPERTIES, defaultSwaggerConfiguration.sys);
   }
 
 }
