@@ -48,6 +48,6 @@ public @interface SwaggerUIConfiguration {
    *
    * @return propriete systeme
    */
-  String externalConfigurationFile() default DEFAULT_SYSTEM_SWAGGERUI_PROPERTIES;
+  String externalConfigurationFile() default EMPTY;
 
 }
