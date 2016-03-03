@@ -30,6 +30,7 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   private static final String CONFIG_API_DOC_PATH = "swaggerApiDocPath";
   private static final String CONFIG_API_SWAGGER_ENDPOINT = "swaggerApiEndpoint";
   private static final String CONFIG_SWAGGER_ACTIVE = "swaggerActive";
+  private static final String EMPTY = "";
 
   /**
    * Webapp base path
@@ -39,27 +40,27 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   /**
    * SwaggerUI sub path
    */
-  private String apiDocPath;
+  private String apiDocPath = DEFAULT_API_DOC_PATH;
 
   /**
    * Rest API sub path
    */
-  private String restApplicationRoot;
+  private String restApplicationRoot = DEFAULT_REST_APPLICATION_ROOT;
 
   /**
    * Swagger (core & UI) accessible
    */
-  private boolean active;
+  private boolean active = true;
 
   /**
    * Emplacement systeme du fichier de surcharge de configuration
    */
-  private String systemSwaggerUIProperties;
+  private String systemSwaggerUIProperties = DEFAULT_SYSTEM_SWAGGERUI_PROPERTIES;
 
   /**
    * Package de base de l'API Rest
    */
-  private String resourcePackage;
+  private String resourcePackage = EMPTY;
 
   @Override
   public Configuration getConfiguration(ServletContext servletContext) {
