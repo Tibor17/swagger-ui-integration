@@ -64,8 +64,8 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   @Override
   public Configuration getConfiguration(ServletContext servletContext) {
     swaggerConfiguration(servletContext.getContextPath());
-    swaggerCoreConfiguration();
     if (active) {
+      swaggerCoreConfiguration();
       return ConfigurationBuilder.begin()
           .addRule()
           .when(
