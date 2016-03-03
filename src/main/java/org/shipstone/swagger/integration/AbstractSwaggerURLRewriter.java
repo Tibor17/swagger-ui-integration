@@ -24,13 +24,20 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   public static final String DEFAULT_SYSTEM_SWAGGERUI_PROPERTIES = "swaggerui.properties";
 
 
-  private static final String PROJECT_SWAGGER_CONFIGURATION_FILE = "swagger-project.properties";
-
   private static final Logger LOGGER = Logger.getLogger(AbstractSwaggerURLRewriter.class);
+
+  private static final String PROJECT_SWAGGER_CONFIGURATION_FILE = "swagger-project.properties";
   private static final String CONFIG_API_DOC_PATH = "swaggerApiDocPath";
   private static final String CONFIG_API_SWAGGER_ENDPOINT = "swaggerApiEndpoint";
   private static final String CONFIG_SWAGGER_ACTIVE = "swaggerActive";
+  private static final String CONFIG_RESTAPPLICATION_CLASSNAME = "restApplicationClass";
+
   private static final String EMPTY = "";
+
+  /**
+   * Systeme property store System swagger UI Integration file
+   */
+  private static final String CONFIG_SYSTEM_SWAGGERUI_PROPERTY = "systemPropertySwaggerUIName";
 
   /**
    * Webapp base path
@@ -126,22 +133,54 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
 
   private void swaggerConfiguration(final String basePath) {
     this.basePath = basePath;
+    swaggerConfigurationFromAnnotation();
+    swaggerConfigurationFromResourceFile();
+  }
+
+  private void swaggerConfigurationFromResourceFile() {
+    if (getClass().getClassLoader().getResource(PROJECT_SWAGGER_CONFIGURATION_FILE) != null) {
+      try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PROJECT_SWAGGER_CONFIGURATION_FILE)) {
+        Properties configurationProperties = new Properties();
+        configurationProperties.load(inputStream);
+        String restApplicationClassname = configurationProperties.getProperty(CONFIG_RESTAPPLICATION_CLASSNAME, null);
+        if (restApplicationClassname != null && !EMPTY.equals(restApplicationClassname.trim())) {
+          try {
+            Class<?> restApplicationClass = getClass().forName(restApplicationClassname);
+            extractRestApplicationRoot(restApplicationClass);
+          } catch (ClassNotFoundException e) {
+            LOGGER.warn("Rest Application class not found for " + restApplicationClassname);
+          }
+        }
+        active = Boolean.valueOf(configurationProperties.getProperty(CONFIG_SWAGGER_ACTIVE, String.valueOf(active)));
+        apiDocPath = configurationProperties.getProperty(CONFIG_API_DOC_PATH, DEFAULT_API_DOC_PATH);
+        restApplicationRoot = configurationProperties.getProperty(CONFIG_API_SWAGGER_ENDPOINT, DEFAULT_REST_APPLICATION_ROOT);
+        systemSwaggerUIProperties = configurationProperties.getProperty(CONFIG_SYSTEM_SWAGGERUI_PROPERTY, systemSwaggerUIProperties);
+      } catch (IOException e) {
+        LOGGER.error("Error during configuration file access...");
+      }
+
+    }
+  }
+
+  private void swaggerConfigurationFromAnnotation() {
     SwaggerUIConfiguration swaggerUIConfiguration = getClass().getAnnotation(SwaggerUIConfiguration.class);
     if (swaggerUIConfiguration != null) {
       Class<?> restApplicationClass = swaggerUIConfiguration.restApplication();
       if (Void.class.isAssignableFrom(restApplicationClass)) {
         restApplicationRoot = formatPath(swaggerUIConfiguration.restApplicationPath());
       } else {
-        ApplicationPath restApplicationPath = restApplicationClass.getAnnotation(ApplicationPath.class);
-        restApplicationRoot = formatPath(restApplicationPath.value());
-        resourcePackage = restApplicationClass.getPackage().getName();
+        extractRestApplicationRoot(restApplicationClass);
       }
       apiDocPath = formatPath(swaggerUIConfiguration.apiDocPath());
       active = swaggerUIConfiguration.active();
       systemSwaggerUIProperties = swaggerUIConfiguration.externalConfigurationFile();
-    } else {
-      setDefaultConfiguration();
     }
+  }
+
+  private void extractRestApplicationRoot(Class<?> restApplicationClass) {
+    ApplicationPath restApplicationPath = restApplicationClass.getAnnotation(ApplicationPath.class);
+    restApplicationRoot = formatPath(restApplicationPath.value());
+    resourcePackage = restApplicationClass.getPackage().getName();
   }
 
   private String formatPath(String value) {
@@ -161,30 +200,6 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
     beanConfig.setBasePath(basePath + restApplicationRoot);
     beanConfig.setResourcePackage(resourcePackage);
     beanConfig.setScan(true);
-  }
-
-  /**
-   * Surcharge des paramètres par défault ou fourni par l'annotation
-   */
-  private void readProjectConfiguration() {
-    if (getClass().getClassLoader().getResource(PROJECT_SWAGGER_CONFIGURATION_FILE) != null) {
-      try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PROJECT_SWAGGER_CONFIGURATION_FILE)) {
-        Properties configurationProperties = new Properties();
-        configurationProperties.load(inputStream);
-        active = Boolean.valueOf(configurationProperties.getProperty(CONFIG_SWAGGER_ACTIVE, "true"));
-        apiDocPath = configurationProperties.getProperty(CONFIG_API_DOC_PATH, DEFAULT_API_DOC_PATH);
-        restApplicationRoot = configurationProperties.getProperty(CONFIG_API_SWAGGER_ENDPOINT, DEFAULT_REST_APPLICATION_ROOT);
-      } catch (IOException e) {
-        LOGGER.error("Error during configuration file access...");
-      }
-
-    }
-  }
-
-  private void setDefaultConfiguration() {
-    active = true;
-    apiDocPath = DEFAULT_API_DOC_PATH;
-    restApplicationRoot = DEFAULT_REST_APPLICATION_ROOT;
   }
 
   @Override
