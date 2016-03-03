@@ -3,16 +3,11 @@ package org.shipstone.swagger.integration;
 import org.junit.Test;
 import org.shipstone.swagger.integration.tools.TestServletContext;
 
-import javax.sound.midi.SysexMessage;
 import javax.ws.rs.ApplicationPath;
-
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.shipstone.swagger.integration.AbstractSwaggerURLRewriter.*;
 import static org.shipstone.swagger.integration.tools.TestServletContext.TEST_CONTEXT_PATH;
 

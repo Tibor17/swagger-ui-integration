@@ -7,7 +7,6 @@ import org.ocpsoft.rewrite.config.ConfigurationBuilder;
 import org.ocpsoft.rewrite.config.Direction;
 import org.ocpsoft.rewrite.config.Log;
 import org.ocpsoft.rewrite.servlet.config.*;
-import org.ocpsoft.rewrite.servlet.config.Path;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.ApplicationPath;
@@ -15,7 +14,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
