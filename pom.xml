@@ -39,7 +39,7 @@
         <maven.min.version>3.3.0</maven.min.version>
         <swagger.version>1.5.7</swagger.version>
         <swagger-ui.version>2.1.4</swagger-ui.version>
-        <rewrite.version>2.0.12.FINAL</rewrite.version>
+        <rewrite.version>2.0.9.Final</rewrite.version>
         <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/${project.artifactId}</destDir>
     </properties>
