@@ -37,7 +37,7 @@ public @interface SwaggerUIConfiguration {
   String apiDocPath() default DEFAULT_API_DOC_PATH;
 
   /**
-   * Active swagger (core & UI)
+   * Active swagger (core and UI)
    *
    * @return swagger actif
    */

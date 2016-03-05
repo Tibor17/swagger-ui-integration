@@ -59,6 +59,8 @@ public abstract class StreamResources extends HttpOperation implements Parameter
    * Initialize response with file from resource
    *
    * @param resourceLocation resource location
+   * @param targetInFile pattern in index.html to replace
+   * @param replacementInFile replace in file
    * @return StreamResource (HttpOperation)
    */
   public static StreamResources from(final String resourceLocation, final String targetInFile, final String replacementInFile) {
@@ -69,6 +71,9 @@ public abstract class StreamResources extends HttpOperation implements Parameter
    * Initialize response with file from resource
    *
    * @param resourceLocation resource location
+   * @param targetInFile pattern in index.html to replace
+   * @param replacementInFile replace in file
+   * @param charset charset
    * @return StreamResource (HttpOperation)
    */
   public static StreamResources from(final String resourceLocation, final String targetInFile, final String replacementInFile, final Charset charset) {
