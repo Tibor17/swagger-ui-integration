@@ -1,5 +1,5 @@
 # swagger-ui-integration
-Swagger core and Swagger UI integration effortless for JavaEE application
+Swagger core and Swagger UI integration effortless for Java EE application
 
 ---
 
