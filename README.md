@@ -11,23 +11,44 @@ Swagger core and Swagger UI integration effortless for JavaEE application
 
 swagger-ui-integration is a library that allows you to turn at the same time exposing the description of the REST API of the application via the swagger and offer access a UI (swagger-UI) using descriptive swagger thereof.
 
+swagger lib linked : 
+
+* swaggerUI : 2.1.8-M1
+* swagger-core : 1.5.7
+
+###Use Swagger core and Swagger UI in your project.
+
 The library provides a number of default values and get 3 levels of configuration.
 
-***annotation/configuration files properties and default values*** : 
-
-* ```restApplication``` : classname for the class use JAS-RS ```@ApplicationPath``` : ```Void.class``` (not assigned)
-* ```restApplicationPath``` : API REST path root : ```/api``` - first seek the ```@ApplicationPath``` given by ```restApplication```, if not exist, use the property ```restApplicationPath```
-* ```apiDocPath``` : API documentation site : ```/api-docs```
-* ```active``` : Access to the description of the REST API via Swagger : ```true```
-* ```externalConfigurationFile``` Name of the property system that stores the path to the system configuration file : ```[EMPTY]``` (*need to set*)
-
-***Configurations level*** :
+***Configurations path*** :
 
 1. Annotation ```@SwaggerUIConfiguration```
 2. resource Configuration file ```swagger-project.properties``` allow set configuration during build
 3. system configuration file store in system property. The system property'name ***must be*** set in ```externalConfigurationFile```
 
-###Use Swagger core and Swagger UI in your project.
+***annotation files properties and default values*** : 
+
+* ```configurationFilename``` : Default resource file store swagger-ui-integration configuration
+    * *default value : ```swagger-project.properties```*
+* ```systemPropertyForExternalConfigurationFilename``` : property system name storing the full path to the external configuration file for swagger-ui-integration.
+    * *default value was empty, if you want a external configuration name, you* ***must set*** *one*.
+* ```restApplicationClass``` : classname for the class use JAS-RS ```@ApplicationPath```
+    * *default value : ```Void.class``` (not assigned)*
+* ```restApplicationPath``` : API REST path root, first seek the ```@ApplicationPath``` given by ```restApplication```, if not exist, use the property ```restApplicationPath```.
+    * *default value : ```/api```*
+* ```apiDocPath``` : API documentation sub-path
+    * *default value : ```/api-docs```*
+* ```apiDocIndex``` : resource fully qualified filename for replace default index.html used by.
+    * *default value : not fixed - use default swagger-ui-integration index.html (hide url field)*.
+    * *see below for more explaination for your own index file*
+* ```active``` : Access to the description of the REST API via Swagger and activate swagger description.
+    * *default value : ```true```*
+
+***configuration files properties and default values*** : 
+
+All property must used prefixe ```swagger.``` (i.e. ```swagger.apiDocPath```). You can store your swagger properties in overall project configuration file.
+
+***how use it***
 
 First add dependency to your JavaEE project : 
 
@@ -88,7 +109,7 @@ public class PersonEndpoint {
 
 If you use only default configuration, the library give you two url (i.e. use previous exemple and context (*project final name*) as ```customer``` in localhost server : 
 
-* swagger documentation file : [http://localhost/customer/api/swagger](http://localhost/customer/api/swagger)
+* swagger documentation file : [http://localhost/customer/api/swagger](http://localhost/customer/api/swagger) (according the ```@ApplicationPath``` value.
 * swagger UI site : [http://localhost/customer/api-docs/](http://localhost/customer/api-docs/) or [http://localhost/customer/api-docs/index.html](http://localhost/customer/api-docs/index.html)
 
 Activation or desactivation by system configuration file need to relaunch application.

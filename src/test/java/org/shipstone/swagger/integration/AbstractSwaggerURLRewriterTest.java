@@ -25,7 +25,7 @@ public class AbstractSwaggerURLRewriterTest {
     assertEquals(DEFAULT_REST_APPLICATION_ROOT, defaultSwaggerConfiguration.getRestApplicationRoot());
     assertEquals(DEFAULT_API_DOC_PATH, defaultSwaggerConfiguration.getApiDocPath());
     assertTrue(defaultSwaggerConfiguration.isActive());
-    assertEquals(EMPTY, defaultSwaggerConfiguration.getSystemSwaggerUIProperties());
+    assertEquals(EMPTY, defaultSwaggerConfiguration.getSystemPropertyForExternalConfigurationFilename());
   }
 
   @Test
@@ -40,12 +40,12 @@ public class AbstractSwaggerURLRewriterTest {
   }
 
   @Test
-  public void testSystemSwaggerConfigurationByAnnotation() {
+  public void ÇtestSystemSwaggerConfigurationByAnnotation() {
     Path path = Paths.get("swaggerUIConfig.properties");
     System.setProperty("systemUIConfig.properties", path.toAbsolutePath().toString());
     RestAppSystemSwaggerConfiguration swaggerConfiguration = new RestAppSystemSwaggerConfiguration();
     swaggerConfiguration.getConfiguration(new TestServletContext());
-    assertEquals("systemUIConfig.properties", swaggerConfiguration.getSystemSwaggerUIProperties());
+    assertEquals("systemUIConfig.properties", swaggerConfiguration.getSystemPropertyForExternalConfigurationFilename());
     assertEquals("/systemSwaggerApiDocPath", swaggerConfiguration.getApiDocPath());
     assertFalse(swaggerConfiguration.isActive());
   }
@@ -57,7 +57,7 @@ class DefaultSwaggerConfiguration extends AbstractSwaggerURLRewriter {
 }
 
 @SwaggerUIConfiguration(
-    restApplication = TestRestApplication.class
+    restApplicationClass = TestRestApplication.class
     , apiDocPath = "apiRestDoc"
     , active = false
 )
@@ -65,8 +65,8 @@ class RestAppSwaggerConfiguration extends AbstractSwaggerURLRewriter {
 }
 
 @SwaggerUIConfiguration(
-    restApplication = TestRestApplication.class
-    , externalConfigurationFile = "systemUIConfig.properties"
+    restApplicationClass = TestRestApplication.class
+    , systemPropertyForExternalConfigurationFilename = "systemUIConfig.properties"
 )
 class RestAppSystemSwaggerConfiguration extends AbstractSwaggerURLRewriter {
 }
