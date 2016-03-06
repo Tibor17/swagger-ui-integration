@@ -39,7 +39,7 @@
         <javaee.version>7.0</javaee.version>
         <maven.min.version>3.3.0</maven.min.version>
         <swagger.version>1.5.7</swagger.version>
-        <swagger-ui.version>2.1.4</swagger-ui.version>
+        <swagger-ui.version>2.1.8-M1</swagger-ui.version>
         <rewrite.version>2.0.9.Final</rewrite.version>
         <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/${project.artifactId}</destDir>
@@ -84,7 +84,7 @@
                         </goals>
                         <configuration>
                             <url>${upstream.url}</url>
-                            <fromFile>v2.1.8-M1.zip</fromFile>
+                            <fromFile>v${swagger-ui.version}.zip</fromFile>
                             <toFile>${project.basedir}/temp/swagger-ui-dist.zip</toFile>
                         </configuration>
                     </execution>
