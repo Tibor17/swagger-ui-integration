@@ -24,7 +24,7 @@ The library provides a number of default values and get 3 levels of configuratio
 
 1. Annotation ```@SwaggerUIConfiguration```
 2. resource Configuration file ```swagger-project.properties``` allow set configuration during build
-3. system configuration file store in system property. The system property'name ***must be*** set in ```externalConfigurationFile```
+3. system configuration file store in system property. The system property'name ***must be*** set in ```systemPropertyForExternalConfigurationFilename ```
 
 ***annotation files properties and default values*** : 
 
