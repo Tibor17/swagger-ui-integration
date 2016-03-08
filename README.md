@@ -16,6 +16,8 @@ swagger lib linked :
 * swaggerUI : 2.1.4
 * swagger-core : 1.5.7
 
+demo : [examples how to use swagger-ui-integration lib on github](https://github.com/ptitbob/swagger-ui-integration-test)
+
 ###Use Swagger core and Swagger UI in your project.
 
 The library provides a number of default values and get 3 levels of configuration.
