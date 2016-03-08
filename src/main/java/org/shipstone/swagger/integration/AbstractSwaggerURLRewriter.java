@@ -123,7 +123,7 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
           .perform(
               Forward.to("/swagger-ui-integration/{path}")
                   .and(
-                      Log.message(Logger.Level.INFO, "Client requested path: {path} - Forward to /swagger-ui-integration/{path}")
+                      Log.message(Logger.Level.INFO, "Client requested path: {path}")
                   )
           )
           .where("path").matches(".*")
