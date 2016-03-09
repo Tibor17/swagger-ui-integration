@@ -4,7 +4,7 @@
 
     <groupId>org.shipstone.swagger</groupId>
     <artifactId>swagger-ui-integration</artifactId>
-    <version>0.5</version>
+    <version>0.6-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>Swagger core and UI integration effortless for JavaEE application</description>
 
@@ -30,7 +30,7 @@
     <scm>
         <connection>scm:git:git@github.com:ptitbob/swagger-ui-integration.git</connection>
         <developerConnection>scm:git:git@github.com:ptitbob/swagger-ui-integration.git</developerConnection>
-        <tag>v0.5</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
