@@ -6,6 +6,8 @@
     <artifactId>swagger-ui-integration</artifactId>
     <version>0.6-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <url>https://github.com/ptitbob/swagger-ui-integration</url>
+    <name>swagger-ui-integration</name>
     <description>Swagger core and UI integration effortless for JavaEE application</description>
 
     <licenses>
@@ -28,6 +30,7 @@
     </developers>
 
     <scm>
+        <url>https://github.com/ptitbob/swagger-ui-integration</url>
         <connection>scm:git:git@github.com:ptitbob/swagger-ui-integration.git</connection>
         <developerConnection>scm:git:git@github.com:ptitbob/swagger-ui-integration.git</developerConnection>
         <tag>HEAD</tag>
