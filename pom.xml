@@ -4,7 +4,7 @@
 
     <groupId>org.shipstone.swagger</groupId>
     <artifactId>swagger-ui-integration</artifactId>
-    <version>0.6</version>
+    <version>0.7-SNAPSHOT</version>
     <packaging>jar</packaging>
     <url>https://github.com/ptitbob/swagger-ui-integration</url>
     <name>swagger-ui-integration</name>
@@ -33,7 +33,7 @@
         <url>https://github.com/ptitbob/swagger-ui-integration</url>
         <connection>scm:git:git@github.com:ptitbob/swagger-ui-integration.git</connection>
         <developerConnection>scm:git:git@github.com:ptitbob/swagger-ui-integration.git</developerConnection>
-        <tag>v0.6</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
