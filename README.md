@@ -18,6 +18,8 @@ swagger lib linked :
 
 demo : [examples how to use swagger-ui-integration lib on github](https://github.com/ptitbob/swagger-ui-integration-test)
 
+Since version 0.6, you can reach the library from [maven central repository](http://mvnrepository.com/artifact/org.shipstone.swagger/swagger-ui-integration).
+
 ###Use Swagger core and Swagger UI in your project.
 
 The library provides a number of default values and get 3 levels of configuration.
