@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.shipstone</groupId>
+    <groupId>org.shipstone.swagger</groupId>
     <artifactId>swagger-ui-integration</artifactId>
     <version>0.7-SNAPSHOT</version>
     <packaging>jar</packaging>
     <url>https://github.com/ptitbob/swagger-ui-integration</url>
     <name>swagger-ui-integration</name>
-    <description>Swagger core and UI integration effortless for JavaEE application</description>
+    <description>DEPRECATED for v0.8 use org.shipstone » swagger-ui-integration - Swagger core and UI integration effortless for JavaEE application</description>
 
     <licenses>
         <license>
