@@ -35,6 +35,7 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   private static final String CONFIG_PREIXE = "swagger.";
   private static final String CONFIG_HOST = CONFIG_PREIXE + "host";
   private static final String CONFIG_RESTAPPLICATION_CLASSNAME = CONFIG_PREIXE + "restApplicationClassname";
+  private static final String CONFIG_RESTAPPLICATION_PACKAGE = CONFIG_PREIXE + "restApplicationPackage";
   private static final String CONFIG_RESTAPPLICATION_PATH = CONFIG_PREIXE + "restApplicationPath";
   private static final String CONFIG_API_DOC_PATH = CONFIG_PREIXE + "apiDocPath";
   private static final String CONFIG_API_DOC_INDEX = CONFIG_PREIXE + "apiDocIndex";
@@ -199,6 +200,7 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
       }
     } else  {
       restApplicationRoot = formatPath(configurationProperties.getProperty(CONFIG_RESTAPPLICATION_PATH, restApplicationRoot));
+      resourcePackage = configurationProperties.getProperty(CONFIG_RESTAPPLICATION_PACKAGE, resourcePackage);
     }
     apiDocPath = formatPath(configurationProperties.getProperty(CONFIG_API_DOC_PATH, apiDocPath));
     apiDocIndex = configurationProperties.getProperty(CONFIG_API_DOC_INDEX, apiDocIndex);
@@ -214,6 +216,8 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
       Class<?> restApplicationClass = swaggerUIConfiguration.restApplicationClass();
       if (Void.class.isAssignableFrom(restApplicationClass)) {
         restApplicationRoot = formatPath(swaggerUIConfiguration.restApplicationPath());
+        String restApplicationPackage = swaggerUIConfiguration.restApplicationPackage() == null ? EMPTY : swaggerUIConfiguration.restApplicationPackage();
+        resourcePackage = EMPTY.equals(restApplicationPackage.trim()) ? getClass().getPackage().getName() : restApplicationPackage.trim();
       } else {
         extractRestApplicationRoot(restApplicationClass);
       }
@@ -225,7 +229,7 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
 
   private void extractRestApplicationRoot(Class<?> restApplicationClass) {
     ApplicationPath restApplicationPath = restApplicationClass.getAnnotation(ApplicationPath.class);
-    restApplicationRoot = formatPath(restApplicationPath.value());
+    restApplicationRoot = formatPath(restApplicationPath == null ? "" : restApplicationPath.value());
     resourcePackage = restApplicationClass.getPackage().getName();
   }
 

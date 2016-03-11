@@ -34,19 +34,27 @@ public @interface SwaggerUIConfiguration {
   String host() default DEFAULT_HOST;
 
   /**
-   * Classe de l'application JaxRs.
+   * Class use @ApplicationPath JAXRS annotation. Used to defined restApplicationPath and package to scan by swagger introspection.
    *
    * @return classe
    */
   Class<?> restApplicationClass() default Void.class;
 
   /**
-   * path de l'application REST, utilisé seulement si la classe de l'application REST n'est pas fourni
+   * Base path for REST application - used only if the restApplicationClass was undefined
+   * By default /api
    * Valeur par defaut : api
    *
    * @return path
    */
   String restApplicationPath() default DEFAULT_REST_APPLICATION_ROOT;
+
+  /**
+   * Base package REST application - used only if the restApplicationClass was undefined.
+   * By default, the SwaggerUIConfiguration annoted class package.
+   * @return package as string
+   */
+  String restApplicationPackage() default EMPTY;
 
   /**
    * Path de l'UI Swagger
