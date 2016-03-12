@@ -18,7 +18,7 @@ swagger lib linked :
 
 demo : [examples how to use swagger-ui-integration lib on github](https://github.com/ptitbob/swagger-ui-integration-test)
 
-Since version 0.6, you can reach the library from [maven central repository](http://mvnrepository.com/artifact/org.shipstone.swagger/swagger-ui-integration).
+Since version 0.6, you can reach the library from [maven central repository](http://mvnrepository.com/artifact/org.shipstone/swagger-ui-integration). 
 
 ###Use Swagger core and Swagger UI in your project.
 
@@ -38,8 +38,10 @@ The library provides a number of default values and get 3 levels of configuratio
     * *default value was empty, if you want a external configuration name, you* ***must set*** *one*.
 * ```restApplicationClass``` : classname for the class use JAS-RS ```@ApplicationPath```
     * *default value : ```Void.class``` (not assigned)*
-* ```restApplicationPath``` : API REST path root, first seek the ```@ApplicationPath``` given by ```restApplication```, if not exist, use the property ```restApplicationPath```.
+* ```restApplicationPath``` : Base path for REST application - used only if the restApplicationClass was undefined.
     * *default value : ```/api```*
+* ```restApplicationPackage``` : Base package REST application - used only if the restApplicationClass was undefined.
+    * by default empty, the process take class path from ```@SwaggerUIConfiguration``` annoted class package.
 * ```apiDocPath``` : API documentation sub-path
     * *default value : ```/api-docs```*
 * ```apiDocIndex``` : resource fully qualified filename for replace default index.html used by.
