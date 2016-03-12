@@ -64,11 +64,12 @@ First add dependency to your JavaEE project :
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.shipstone.swagger</groupId>
+            <groupId>org.shipstone</groupId>
             <artifactId>swagger-ui-integration</artifactId>
-            <version>0.5</version>
+            <version>0.8</version>
         </dependency>
     </dependencies>
 ```
