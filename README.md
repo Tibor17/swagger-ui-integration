@@ -93,7 +93,7 @@ public class RestApplication extends Application {
 }
 ```
 
-And finally, on all your endpooints you want to view in swagger documentation, add specific swagger annotation. Most important is ```@Api``` ;)
+And finally, on all your endpoints you want to view in swagger documentation, add specific swagger annotation. Most important is ```@Api``` ;)
 
 ```java
 @Path("person")
