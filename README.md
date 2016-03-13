@@ -4,6 +4,7 @@ Swagger core and Swagger UI integration effortless for Java EE application
 ---
 
 [![Build Status](https://travis-ci.org/ptitbob/swagger-ui-integration.svg?branch=master)](https://travis-ci.org/ptitbob/swagger-ui-integration)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.shipstone/swagger-ui-integration/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.shipstone/swagger-ui-integration)
 
 ---
 
