@@ -43,7 +43,7 @@
         <maven.min.version>3.3.0</maven.min.version>
         <swagger.version>1.5.7</swagger.version>
         <swagger-ui.version>2.1.4</swagger-ui.version>
-        <rewrite.version>2.0.9.Final</rewrite.version>
+        <javax.servlet.version>3.0.1</javax.servlet.version>
         <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/${project.artifactId}</destDir>
     </properties>
@@ -66,15 +66,10 @@
             <version>${swagger.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
             <scope>provided</scope>
-            <version>${javaee.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ocpsoft.rewrite</groupId>
-            <artifactId>rewrite-servlet</artifactId>
-            <version>${rewrite.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -27,7 +27,7 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   public static final String DEFAULT_REST_APPLICATION_ROOT = "/api";
   public static final String DEFAULT_SYSTEM_SWAGGERUI_PROPERTIES = "swaggerui.properties";
   public static final String DEFAULT_SWAGGER_CONFIGURATION_FILE = "swagger-project.properties";
-  private static final String DEFAULT_SWAGGER_UI_INDEX = "inside-docs/index.html";
+  public static final String DEFAULT_SWAGGER_UI_INDEX = "inside-docs/index.html";
   public static final String DEFAULT_HOST = "localhost:8080";
 
   private static final Logger LOGGER = Logger.getLogger(AbstractSwaggerURLRewriter.class);

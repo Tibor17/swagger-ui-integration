@@ -1,4 +1,4 @@
-package org.shipstone.swagger.integration;
+package org.shipstone.swagger.integration.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
