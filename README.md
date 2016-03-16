@@ -123,3 +123,12 @@ If you use only default configuration, the library give you two url (i.e. use pr
 Activation or desactivation by system configuration file need to relaunch application.
 
 have fun !
+
+---
+
+####ToDo
+
+* [ ] remove org.ocpsoft.rewrite dependencies - version 0.9
+* [ ] use webfragment and ensure compatibility java EE 6 - version 0.9
+* [ ] split the library into 2 sub-module (api & core) - version 1.0+
+* [ ] allow to replace embedded site with a external site - version 1.0+
