@@ -23,13 +23,6 @@ import java.util.Properties;
  */
 public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvider {
 
-  public static final String DEFAULT_API_DOC_PATH = "/api-docs";
-  public static final String DEFAULT_REST_APPLICATION_ROOT = "/api";
-  public static final String DEFAULT_SYSTEM_SWAGGERUI_PROPERTIES = "swaggerui.properties";
-  public static final String DEFAULT_SWAGGER_CONFIGURATION_FILE = "swagger-project.properties";
-  public static final String DEFAULT_SWAGGER_UI_INDEX = "inside-docs/index.html";
-  public static final String DEFAULT_HOST = "localhost:8080";
-
   private static final Logger LOGGER = Logger.getLogger(AbstractSwaggerURLRewriter.class);
 
   private static final String CONFIG_PREIXE = "swagger.";
@@ -40,8 +33,6 @@ public abstract class AbstractSwaggerURLRewriter extends HttpConfigurationProvid
   private static final String CONFIG_API_DOC_PATH = CONFIG_PREIXE + "apiDocPath";
   private static final String CONFIG_API_DOC_INDEX = CONFIG_PREIXE + "apiDocIndex";
   private static final String CONFIG_SWAGGER_ACTIVE = CONFIG_PREIXE + "active";
-
-  public static final String EMPTY = "";
 
   /**
    * Systeme property store System swagger UI Integration file

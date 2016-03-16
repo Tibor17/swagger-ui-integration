@@ -1,4 +1,4 @@
-package org.shipstone.swagger.integration.core;
+package org.shipstone.swagger.integration.core.configuration;
 
 import java.util.Objects;
 
