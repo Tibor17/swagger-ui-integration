@@ -14,12 +14,4 @@ public interface DefaultConfigurationProvider {
 
   public static final String EMPTY = "";
 
-  /**
-   * Provide default configuration with default values
-   * @return default configuration
-   */
-  default Configuration getDefaultConfiguration() {
-    return new Configuration(DEFAULT_SWAGGER_CONFIGURATION_FILE, null, DEFAULT_HOST, null, DEFAULT_REST_APPLICATION_ROOT, null, DEFAULT_API_DOC_PATH, DEFAULT_SWAGGER_UI_INDEX, true);
-  }
-
 }
