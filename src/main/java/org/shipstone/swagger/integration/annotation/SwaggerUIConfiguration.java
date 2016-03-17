@@ -1,13 +1,11 @@
 package org.shipstone.swagger.integration.annotation;
 
-import org.shipstone.swagger.integration.core.DefaultConfigurationProvider;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static org.shipstone.swagger.integration.core.DefaultConfigurationProvider.*;
+import static org.shipstone.swagger.integration.core.configuration.DefaultConfigurationProvider.*;
 
 /**
  * @author François Robert
