@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
+              version="3.0">
+
+    <name id="thelib">org_shipstone_sandbox_thelib</name>
+    <distributable/>
+
+    <ordering>
+        <before>
+            <others/>
+        </before>
+    </ordering>
+
+    <filter>
+        <filter-name>swagger-ui-integration</filter-name>
+        <filter-class>org.shipstone.swagger.integration.core.SwaggerUIIntegration</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>swagger-ui-integration</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ASYNC</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+</web-fragment>
