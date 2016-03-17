@@ -18,12 +18,12 @@ public class SwaggerUIIntegration implements Filter {
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
-    readConfigurations();
+    readConfigurations(filterConfig.getServletContext());
   }
 
-  private void readConfigurations() {
+  private void readConfigurations(ServletContext servletContext) {
     for (SpecificConfigurationReader configurationReader : fillConfigurationReader()) {
-      configuration = configurationReader.readConfiguration(configuration);
+      configuration = configurationReader.readConfiguration(configuration, servletContext);
     }
   }
 
