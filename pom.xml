@@ -44,6 +44,7 @@
         <swagger.version>1.5.7</swagger.version>
         <swagger-ui.version>2.1.4</swagger-ui.version>
         <javax.servlet.version>3.0.1</javax.servlet.version>
+        <jax.ws.rs.version>2.0</jax.ws.rs.version>
         <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/${project.artifactId}</destDir>
     </properties>
@@ -69,6 +70,12 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${jax.ws.rs.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
