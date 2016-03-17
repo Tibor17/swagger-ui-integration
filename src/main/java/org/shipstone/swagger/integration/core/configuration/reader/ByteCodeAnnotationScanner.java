@@ -40,6 +40,7 @@ public class ByteCodeAnnotationScanner {
   private ServletContext servletContext;
   private String basePackage;
   private String basePath;
+  private String baseURL;
 
   private Map<String, Class<? extends Annotation>> seekingAnnotationMap;
   private Map<Class<? extends Annotation>, String> annotatedClassname;
@@ -55,7 +56,7 @@ public class ByteCodeAnnotationScanner {
       this.basePackage = basePackage;
       this.basePath = WEB_INF_CLASSES_FOLDER + basePackage.replace('.', '/');
     } else {
-      this.basePackage = WEB_INF_CLASSES_FOLDER;
+      this.basePath = WEB_INF_CLASSES_FOLDER;
     }
   }
 
@@ -63,7 +64,7 @@ public class ByteCodeAnnotationScanner {
     seekingAnnotationMap = new HashMap<>();
     annotatedClassname = new HashMap<>();
     for (Class<? extends Annotation> aClass : annotationClasses) {
-      seekingAnnotationMap.put("L" + aClass.getName().replace('.', '/'), aClass);
+      seekingAnnotationMap.put("L" + aClass.getName().replace('.', '/') + ";", aClass);
     }
   }
 
@@ -73,16 +74,22 @@ public class ByteCodeAnnotationScanner {
    * @return classname map
    */
   public Map<Class<? extends Annotation>, String> get() {
+    URL classFolderUrl = null;
     try {
-      URL basePathUrl = new URL(basePackage);
+      classFolderUrl = servletContext.getResource(WEB_INF_CLASSES_FOLDER);
+      if (classFolderUrl == null) {
+        throw new IllegalStateException("no class folder found in WEB-INF directory");
+      }
+      baseURL = classFolderUrl.toString().substring(0, classFolderUrl.toString().length() - WEB_INF_CLASSES_FOLDER.length());
       processFolder(basePath);
-    } catch (MalformedURLException e) {
-      LOGGER.warn("Error during process base packahe URL", e);
+      return annotatedClassname;
+    } catch (IOException e) {
+      LOGGER.error("Error during processing folder", e);
+      throw new IllegalStateException("Error during processing folder", e);
     }
-    return annotatedClassname;
   }
 
-  private void processFolder(String basePath) {
+  private void processFolder(String basePath) throws IOException {
     Iterator<String> subPathIterator = getsubPathIterator(basePath);
     while (subPathIterator.hasNext() && seekingAnnotationMap.size() > 0) {
       String subPath = subPathIterator.next();
@@ -94,11 +101,10 @@ public class ByteCodeAnnotationScanner {
     }
   }
 
-  private void processClass(String classPath) {
-    String classname = getClassnameFrom(classPath);
+  private void processClass(String classPath) throws IOException {
     InputStream inputStream = null;
     try {
-      processClass(inputStream, getClassnameFrom(classPath));
+      processClass((inputStream = (new URL(baseURL + classPath)).openStream()) , getClassnameFrom(classPath));
     } finally {
       if (inputStream != null) {
         try {
@@ -129,7 +135,7 @@ public class ByteCodeAnnotationScanner {
 
   private void processClassBytecode(String classname, DataInputStream dataInputStream) throws IOException {
     int constantPoolEntries = dataInputStream.readUnsignedShort() - 1;
-    for (int idxPoolEntry = 0; idxPoolEntry < constantPoolEntries; idxPoolEntry++) {
+    for (int idxPoolEntry = 0; idxPoolEntry < constantPoolEntries && seekingAnnotationMap.size() > 0; idxPoolEntry++) {
       int bytecodeId = dataInputStream.readUnsignedByte();
       switch (bytecodeId) {
         case CONSTANT_Class:
