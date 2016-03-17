@@ -8,11 +8,9 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,17 +23,17 @@ public class ByteCodeAnnotationScanner {
   public static final String WEB_INF_CLASSES_FOLDER = "/WEB-INF/classes/";
   public static final String CLASS_EXTENSION = ".class";
 
-  private final static int CONSTANT_Class = 7;
-  private final static int CONSTANT_Fieldref = 9;
-  private final static int CONSTANT_Methodref = 10;
-  private final static int CONSTANT_InterfaceMethodref = 11;
-  private final static int CONSTANT_String = 8;
-  private final static int CONSTANT_Integer = 3;
-  private final static int CONSTANT_Float = 4;
-  private final static int CONSTANT_Long = 5;
-  private final static int CONSTANT_Double = 6;
-  private final static int CONSTANT_NameAndType = 12;
-  private final static int CONSTANT_Utf8 = 1;
+  private final static int ID_Class = 7;
+  private final static int ID_Fieldref = 9;
+  private final static int ID_Methodref = 10;
+  private final static int ID_InterfaceMethodref = 11;
+  private final static int ID_String = 8;
+  private final static int ID_Integer = 3;
+  private final static int ID_Float = 4;
+  private final static int ID_Long = 5;
+  private final static int ID_Double = 6;
+  private final static int ID_NameAndType = 12;
+  private final static int ID_Utf8 = 1;
 
   private ServletContext servletContext;
   private String basePackage;
@@ -138,36 +136,38 @@ public class ByteCodeAnnotationScanner {
     for (int idxPoolEntry = 0; idxPoolEntry < constantPoolEntries && seekingAnnotationMap.size() > 0; idxPoolEntry++) {
       int bytecodeId = dataInputStream.readUnsignedByte();
       switch (bytecodeId) {
-        case CONSTANT_Class:
+        case ID_Class:
           dataInputStream.readUnsignedShort();
           break;
-        case CONSTANT_Fieldref:
-        case CONSTANT_Methodref:
-        case CONSTANT_InterfaceMethodref:
+        case ID_Fieldref:
+        case ID_Methodref:
+        case ID_InterfaceMethodref:
           dataInputStream.readUnsignedShort();
           dataInputStream.readUnsignedShort();
           break;
-        case CONSTANT_String:
+        case ID_String:
           dataInputStream.readUnsignedShort();
           break;
-        case CONSTANT_Integer:
-        case CONSTANT_Float:
+        case ID_Integer:
+        case ID_Float:
           dataInputStream.readInt();
           break;
-        case CONSTANT_Long:
-        case CONSTANT_Double:
+        case ID_Long:
+        case ID_Double:
           dataInputStream.readLong();
           idxPoolEntry++;
           break;
-        case CONSTANT_NameAndType:
+        case ID_NameAndType:
           dataInputStream.readUnsignedShort();
           dataInputStream.readUnsignedShort();
           break;
-        case CONSTANT_Utf8:
+        case ID_Utf8:
           String fieldDescriptor = dataInputStream.readUTF();
-          for (Map.Entry<String, Class<? extends Annotation>> entry : seekingAnnotationMap.entrySet()) {
-            if (fieldDescriptor.equals(entry.getKey())) {
-              annotatedClassname.put(seekingAnnotationMap.remove(entry.getKey()), classname);
+          if (fieldDescriptor.startsWith("L")) {
+            for (Map.Entry<String, Class<? extends Annotation>> entry : seekingAnnotationMap.entrySet()) {
+              if (fieldDescriptor.equals(entry.getKey())) {
+                annotatedClassname.put(seekingAnnotationMap.remove(entry.getKey()), classname);
+              }
             }
           }
         default:
