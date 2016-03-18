@@ -43,10 +43,12 @@ public class ByteCodeAnnotationScanner {
   private Map<String, Class<? extends Annotation>> seekingAnnotationMap;
   private Map<Class<? extends Annotation>, String> annotatedClassname;
 
+  @SafeVarargs
   public ByteCodeAnnotationScanner(ServletContext servletContext, Class<? extends Annotation>... annotationClasses) {
     this(servletContext, null, annotationClasses);
   }
 
+  @SafeVarargs
   public ByteCodeAnnotationScanner(ServletContext servletContext, String basePackage, Class<? extends Annotation>... annotationClasses) {
     fillAnnotionInformation(annotationClasses);
     this.servletContext = servletContext;
