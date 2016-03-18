@@ -119,6 +119,7 @@ public class ByteCodeAnnotationScanner {
     if (inputStream == null) {
       return;
     }
+    // thanks to LSE Blog for the bytecode explanation (https://blog.lse.epita.fr)
     DataInputStream dataInputStream = new DataInputStream(inputStream);
     try {
       if (dataInputStream.readInt() == 0xCAFEBABE) {
