@@ -52,6 +52,7 @@ public class AnnotationConfigurationReader extends ConfigurationReader {
     if (applicationPath != null) {
       try {
         configuration.setRestApplicationClass(classLoader.loadClass(annotatedClassMap.get(ApplicationPath.class)));
+        configuration.setRestApplicationPath(applicationPath.value());
         configuration.setRestApplicationPackageAsRoot(swaggerUIConfiguration.restApplicationPackageAsRoot());
         if (configuration.isRestApplicationPackageAsRoot()) {
           configuration.setRestApplicationPackage(configuration.getRestApplicationClass().getPackage().getName());
@@ -60,7 +61,6 @@ public class AnnotationConfigurationReader extends ConfigurationReader {
         configuration.setRestApplicationClass(null);
       }
     }
-    configuration.setRestApplicationPath(applicationPath.value());
     configuration.setApiDocPath(swaggerUIConfiguration.apiDocPath());
     configuration.setApiDocIndex(swaggerUIConfiguration.apiDocIndex());
   }
