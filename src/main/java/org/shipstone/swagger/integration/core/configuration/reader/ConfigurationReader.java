@@ -10,17 +10,9 @@ import javax.servlet.ServletContext;
  */
 public abstract class ConfigurationReader implements SpecificConfigurationReader, DefaultConfigurationProvider {
 
-  /**
-   * Provide default configuration with default values
-   * @return default configuration
-   */
-  private Configuration getDefaultConfiguration() {
-    return new Configuration(DEFAULT_SWAGGER_CONFIGURATION_FILE, null, DEFAULT_HOST, null, DEFAULT_REST_APPLICATION_ROOT, null, DEFAULT_API_DOC_PATH, DEFAULT_SWAGGER_UI_INDEX, false);
-  }
-
   @Override
   public Configuration readConfiguration(Configuration configuration, ServletContext servletContext) {
-    return readConfigurationFrom(configuration == null ? getDefaultConfiguration() : configuration, servletContext);
+    return readConfigurationFrom(configuration == null ? Configuration.getDefault() : configuration, servletContext);
   }
 
   protected abstract Configuration readConfigurationFrom(Configuration configuration, ServletContext servletContext);
