@@ -103,7 +103,7 @@ public class ByteCodeAnnotationScanner {
   private void processClass(String classPath) throws IOException {
     InputStream inputStream = null;
     try {
-      processClass((inputStream = (new URL(baseURL + classPath)).openStream()) , getClassnameFrom(classPath));
+      processClass((inputStream = new URL(baseURL + classPath).openStream()) , getClassnameFrom(classPath));
     } finally {
       if (inputStream != null) {
         try {
