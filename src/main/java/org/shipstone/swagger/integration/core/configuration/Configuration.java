@@ -2,10 +2,16 @@ package org.shipstone.swagger.integration.core.configuration;
 
 import java.util.Objects;
 
+import static org.shipstone.swagger.integration.core.configuration.DefaultConfigurationProvider.*;
+
 /**
  * @author francois robert
  */
 public class Configuration {
+
+  public static Configuration getDefault() {
+    return new Configuration(DEFAULT_SWAGGER_CONFIGURATION_FILE, null, DEFAULT_HOST, null, DEFAULT_REST_APPLICATION_ROOT, null, DEFAULT_API_DOC_PATH, DEFAULT_SWAGGER_UI_INDEX, false, true);
+  }
 
   /**
    * resource file store swagger-ui-integration configuration
@@ -26,6 +32,11 @@ public class Configuration {
    * Class use @ApplicationPath JAXRS annotation. Used to defined restApplicationPath and package to scan by swagger introspection.
    */
   private Class<?> restApplicationClass;
+
+  /**
+   * use @ApplicationPath annoted class package as root for swagger introspection.
+   */
+  private boolean restApplicationPackageAsRoot;
 
   /**
    * Base path for REST application - used only if the restApplicationClass was undefined
@@ -58,7 +69,18 @@ public class Configuration {
   public Configuration() {
   }
 
-  public Configuration(String configurationFilename, String systemPropertyForExternalConfigurationFilename, String host, Class<?> restApplicationClass, String restApplicationPath, String restApplicationPackage, String apiDocPath, String apiDocIndex, boolean active) {
+  public Configuration(
+      String configurationFilename
+      , String systemPropertyForExternalConfigurationFilename
+      , String host
+      , Class<?> restApplicationClass
+      , String restApplicationPath
+      , String restApplicationPackage
+      , String apiDocPath
+      , String apiDocIndex
+      , boolean active
+      , boolean useRestApplicationPackageAsRoot
+  ) {
     this.configurationFilename = configurationFilename;
     this.systemPropertyForExternalConfigurationFilename = systemPropertyForExternalConfigurationFilename;
     this.host = host;
@@ -68,6 +90,7 @@ public class Configuration {
     this.apiDocPath = apiDocPath;
     this.apiDocIndex = apiDocIndex;
     this.active = active;
+    this.restApplicationPackageAsRoot = useRestApplicationPackageAsRoot;
   }
 
   public boolean isActive() {
@@ -142,14 +165,24 @@ public class Configuration {
     this.systemPropertyForExternalConfigurationFilename = systemPropertyForExternalConfigurationFilename;
   }
 
+  public boolean isRestApplicationPackageAsRoot() {
+    return restApplicationPackageAsRoot;
+  }
+
+  public void setRestApplicationPackageAsRoot(boolean useRestApplicationPackageAsRoot) {
+    this.restApplicationPackageAsRoot = useRestApplicationPackageAsRoot;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Configuration)) return false;
     Configuration that = (Configuration) o;
-    return isActive() == that.isActive() &&
+    return isRestApplicationPackageAsRoot() == that.isRestApplicationPackageAsRoot() &&
+        isActive() == that.isActive() &&
         Objects.equals(getConfigurationFilename(), that.getConfigurationFilename()) &&
         Objects.equals(getSystemPropertyForExternalConfigurationFilename(), that.getSystemPropertyForExternalConfigurationFilename()) &&
+        Objects.equals(getHost(), that.getHost()) &&
         Objects.equals(getRestApplicationClass(), that.getRestApplicationClass()) &&
         Objects.equals(getRestApplicationPath(), that.getRestApplicationPath()) &&
         Objects.equals(getRestApplicationPackage(), that.getRestApplicationPackage()) &&
@@ -159,16 +192,17 @@ public class Configuration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getConfigurationFilename(), getSystemPropertyForExternalConfigurationFilename(), getRestApplicationClass(), getRestApplicationPath(), getRestApplicationPackage(), getApiDocPath(), getApiDocIndex(), isActive());
+    return Objects.hash(getConfigurationFilename(), getSystemPropertyForExternalConfigurationFilename(), getHost(), getRestApplicationClass(), isRestApplicationPackageAsRoot(), getRestApplicationPath(), getRestApplicationPackage(), getApiDocPath(), getApiDocIndex(), isActive());
   }
 
   @Override
   public String toString() {
-    return "SwaggerConfiguration{" +
+    return "Configuration{" +
         "active=" + active +
         ", apiDocPath='" + apiDocPath + '\'' +
+        ", apiDocIndex='" + apiDocIndex + '\'' +
         ", restApplicationClass=" + restApplicationClass +
-        ", restApplicationPath='" + restApplicationPath + '\'' +
+        ", restApplicationPackageAsRoot=" + restApplicationPackageAsRoot +
         ", restApplicationPackage='" + restApplicationPackage + '\'' +
         '}';
   }
