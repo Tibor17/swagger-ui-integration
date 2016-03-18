@@ -126,6 +126,8 @@ public class ByteCodeAnnotationScanner {
         dataInputStream.readUnsignedShort();
         if (dataInputStream.readUnsignedShort() >= 49) {
           processClassBytecode(classname, dataInputStream);
+        } else {
+          LOGGER.warn("Java 1.4 does not contain the annotation");
         }
       }
     } catch (IOException e) {
