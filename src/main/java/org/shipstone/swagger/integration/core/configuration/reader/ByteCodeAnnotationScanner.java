@@ -36,7 +36,6 @@ public class ByteCodeAnnotationScanner {
   private final static int ID_Utf8 = 1;
 
   private ServletContext servletContext;
-  private String basePackage;
   private String basePath;
   private String baseURL;
 
@@ -53,14 +52,14 @@ public class ByteCodeAnnotationScanner {
     fillAnnotionInformation(annotationClasses);
     this.servletContext = servletContext;
     if (basePackage != null && !basePackage.endsWith(".class")) {
-      this.basePackage = basePackage;
       this.basePath = WEB_INF_CLASSES_FOLDER + basePackage.replace('.', '/');
     } else {
       this.basePath = WEB_INF_CLASSES_FOLDER;
     }
   }
 
-  private void fillAnnotionInformation(Class<? extends Annotation>... annotationClasses) {
+  @SafeVarargs
+  private final void fillAnnotionInformation(Class<? extends Annotation>... annotationClasses) {
     seekingAnnotationMap = new HashMap<>();
     annotatedClassname = new HashMap<>();
     for (Class<? extends Annotation> aClass : annotationClasses) {
