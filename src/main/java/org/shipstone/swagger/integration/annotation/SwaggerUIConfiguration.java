@@ -31,30 +31,16 @@ public @interface SwaggerUIConfiguration {
    * Default host, used by swagger-core configuration for expose correct host in swagger json description.
    * @return host.
    */
-  String host() default DEFAULT_HOST;
+  String host() default EMPTY;
 
   /**
-   * Class use @ApplicationPath JAXRS annotation. Used to defined restApplicationPath and package to scan by swagger introspection.
+   * use @ApplicationPath annoted class package as root for swagger introspection.
    *
-   * @return classe
-   */
-  Class<?> restApplicationClass() default Void.class;
-
-  /**
-   * Base path for REST application - used only if the restApplicationClass was undefined
-   * By default /api
-   * Valeur par defaut : api
+   * by default true, but if no @ApplicationPath class found, default turn to false
    *
-   * @return path
+   * @return true / false
    */
-  String restApplicationPath() default DEFAULT_REST_APPLICATION_ROOT;
-
-  /**
-   * Base package REST application - used only if the restApplicationClass was undefined.
-   * By default, the SwaggerUIConfiguration annoted class package.
-   * @return package as string
-   */
-  String restApplicationPackage() default EMPTY;
+  boolean restApplicationPackageAsRoot() default true;
 
   /**
    * Path de l'UI Swagger
@@ -67,7 +53,7 @@ public @interface SwaggerUIConfiguration {
    * default Index.html file replacement
    * @return resource index.html file replacement
    */
-  String apiDocIndex() default EMPTY;
+  String apiDocIndex() default DEFAULT_SWAGGER_UI_INDEX;
 
   /**
    * Active swagger (core and UI)
