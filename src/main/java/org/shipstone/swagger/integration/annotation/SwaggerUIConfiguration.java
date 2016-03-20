@@ -44,6 +44,8 @@ public @interface SwaggerUIConfiguration {
 
   /**
    * Base package REST application - used only if the restApplicationClass was undefined or restApplicationPackageAsRoot set to false.
+   *
+   * @return package to scan by Swagger
    */
   String restApplicationPackage() default EMPTY;
 
