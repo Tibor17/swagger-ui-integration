@@ -43,6 +43,11 @@ public @interface SwaggerUIConfiguration {
   boolean restApplicationPackageAsRoot() default true;
 
   /**
+   * Base package REST application - used only if the restApplicationClass was undefined or restApplicationPackageAsRoot set to false.
+   */
+  String restApplicationPackage() default EMPTY;
+
+  /**
    * Path de l'UI Swagger
    *
    * @return path
