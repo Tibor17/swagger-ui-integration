@@ -26,4 +26,11 @@ public abstract class ConfigurationReader implements SpecificConfigurationReader
 
   protected abstract Configuration readConfigurationFrom(Configuration configuration, ServletContext servletContext);
 
+  protected ClassLoader getClassLoader() {
+    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+    if (classLoader == null) {
+      classLoader = getClass().getClassLoader();
+    }
+    return classLoader;
+  }
 }

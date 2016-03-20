@@ -82,12 +82,4 @@ public class AnnotationConfigurationReader extends ConfigurationReader {
     return null;
   }
 
-  private ClassLoader getClassLoader() {
-    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-    if (classLoader == null) {
-      classLoader = getClass().getClassLoader();
-    }
-    return classLoader;
-  }
-
 }
