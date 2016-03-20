@@ -3,6 +3,7 @@ package org.shipstone.swagger.integration.core;
 import io.swagger.jaxrs.config.BeanConfig;
 import org.shipstone.swagger.integration.core.configuration.Configuration;
 import org.shipstone.swagger.integration.core.configuration.reader.AnnotationConfigurationReader;
+import org.shipstone.swagger.integration.core.configuration.reader.ResourcesConfigurationReader;
 import org.shipstone.swagger.integration.core.configuration.reader.SpecificConfigurationReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,7 @@ public class SwaggerUIIntegration implements Filter {
   private List<SpecificConfigurationReader> fillConfigurationReader() {
     List<SpecificConfigurationReader> configurationReaderList = new LinkedList<>();
     configurationReaderList.add(new AnnotationConfigurationReader());
+    configurationReaderList.add(new ResourcesConfigurationReader());
     return configurationReaderList;
   }
 
