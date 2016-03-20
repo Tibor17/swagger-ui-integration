@@ -20,6 +20,10 @@ public abstract class ConfigurationReader implements SpecificConfigurationReader
     return configuration;
   }
 
+  /**
+   * update paths
+   * @param configuration configuration
+   */
   public void updatePaths(Configuration configuration) {
     configuration.setApiDocPath(setEndingSlash(configuration.getApiDocPath()));
   }
