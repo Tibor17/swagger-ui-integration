@@ -16,5 +16,17 @@ public class StringUtils {
     return string == null || EMPTY.equals(string.trim());
   }
 
+  public static  String setEndingSlash(String uri) {
+    if (uri != null) {
+      if (uri.startsWith("/")) {
+        uri = uri.substring(1);
+      }
+      return uri.endsWith("/") ? uri : (uri + "/");
+    } else {
+      return uri;
+    }
+  }
+
+
 
 }
