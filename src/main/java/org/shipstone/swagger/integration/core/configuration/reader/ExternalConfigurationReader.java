@@ -25,18 +25,3 @@ public class ExternalConfigurationReader extends FileConfigurationReader {
     return false;
   }
 }
-
-/*
-if (systemPropertyForExternalConfigurationFilename != null && !EMPTY.equals(systemPropertyForExternalConfigurationFilename.trim())) {
-      String configurationSystemFile = System.getProperty(systemPropertyForExternalConfigurationFilename);
-      if (configurationSystemFile != null && Files.exists(Paths.get(configurationSystemFile))) {
-        Properties systemProperties = new Properties();
-        try {
-          systemProperties.load(new FileInputStream(new File(configurationSystemFile)));
-          readConfigurationProperties(systemProperties);
-        } catch (IOException e) {
-          LOGGER.warn("Some problems occured during during system configuration...");
-        }
-      }
-    }
- */
