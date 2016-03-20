@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContext;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -76,7 +77,7 @@ public abstract class FileConfigurationReader extends ConfigurationReader {
     return properties;
   }
 
-  protected abstract InputStream getConfigurationFileStream(Configuration configuration);
+  protected abstract InputStream getConfigurationFileStream(Configuration configuration) throws IOException;
 
   protected abstract boolean couldReachConfigurationFile(Configuration configuration);
 }
