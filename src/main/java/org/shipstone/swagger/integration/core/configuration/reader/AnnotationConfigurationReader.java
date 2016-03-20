@@ -10,7 +10,7 @@ import javax.ws.rs.ApplicationPath;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 
-import static org.shipstone.swagger.integration.core.utils.StringUtils.isNotEmpty;
+import static org.shipstone.swagger.integration.core.tools.StringUtils.isNotEmpty;
 
 /**
  * @author francois

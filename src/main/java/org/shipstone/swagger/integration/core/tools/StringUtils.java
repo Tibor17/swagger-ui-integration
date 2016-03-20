@@ -1,4 +1,4 @@
-package org.shipstone.swagger.integration.core.utils;
+package org.shipstone.swagger.integration.core.tools;
 
 import static org.shipstone.swagger.integration.core.configuration.DefaultConfigurationProvider.EMPTY;
 

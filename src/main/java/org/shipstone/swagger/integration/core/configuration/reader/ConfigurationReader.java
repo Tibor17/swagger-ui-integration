@@ -2,11 +2,10 @@ package org.shipstone.swagger.integration.core.configuration.reader;
 
 import org.shipstone.swagger.integration.core.configuration.Configuration;
 import org.shipstone.swagger.integration.core.configuration.DefaultConfigurationProvider;
-import org.shipstone.swagger.integration.core.utils.StringUtils;
 
 import javax.servlet.ServletContext;
 
-import static org.shipstone.swagger.integration.core.utils.StringUtils.setEndingSlash;
+import static org.shipstone.swagger.integration.core.tools.StringUtils.setEndingSlash;
 
 /**
  * @author francois

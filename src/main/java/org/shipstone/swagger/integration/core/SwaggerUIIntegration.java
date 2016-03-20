@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.shipstone.swagger.integration.core.utils.StringUtils.setEndingSlash;
+import static org.shipstone.swagger.integration.core.tools.StringUtils.setEndingSlash;
 
 /**
  * @author francois
