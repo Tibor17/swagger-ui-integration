@@ -18,7 +18,7 @@ public class Configuration {
   }
 
   /**
-   * resource file store swagger-ui-integration configuration
+   * external file store swagger-ui-integration configuration
    */
   private String configurationFilename;
 
@@ -71,6 +71,23 @@ public class Configuration {
    * Constructor
    */
   public Configuration() {
+  }
+
+  /**
+   * Constructor
+   * @param configuration configuration inherited
+   */
+  public Configuration(Configuration configuration) {
+    this.configurationFilename = configuration.configurationFilename;
+    this.systemPropertyForExternalConfigurationFilename = configuration.systemPropertyForExternalConfigurationFilename;
+    this.host = configuration.host;
+    this.restApplicationClass = configuration.restApplicationClass;
+    this.restApplicationPath = configuration.restApplicationPath;
+    this.restApplicationPackage = configuration.restApplicationPackage;
+    this.apiDocPath = configuration.apiDocPath;
+    this.apiDocIndex = configuration.apiDocIndex;
+    this.active = configuration.active;
+    this.restApplicationPackageAsRoot = configuration.restApplicationPackageAsRoot;
   }
 
   public Configuration(
