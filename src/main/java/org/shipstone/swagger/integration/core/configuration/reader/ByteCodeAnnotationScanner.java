@@ -135,7 +135,10 @@ public class ByteCodeAnnotationScanner {
     }
   }
 
-  private void processClassBytecode(String classname, DataInputStream dataInputStream) throws IOException {
+  private synchronized void processClassBytecode(String classname, DataInputStream dataInputStream) throws IOException {
+    if (seekingAnnotationMap.size() == 0) {
+      return;
+    }
     int constantPoolEntries = dataInputStream.readUnsignedShort() - 1;
     for (int idxPoolEntry = 0; idxPoolEntry < constantPoolEntries && seekingAnnotationMap.size() > 0; idxPoolEntry++) {
       int bytecodeId = dataInputStream.readUnsignedByte();
@@ -168,9 +171,12 @@ public class ByteCodeAnnotationScanner {
         case ID_Utf8:
           String fieldDescriptor = dataInputStream.readUTF();
           if (fieldDescriptor.startsWith("L")) {
-            for (Map.Entry<String, Class<? extends Annotation>> entry : seekingAnnotationMap.entrySet()) {
-              if (fieldDescriptor.equals(entry.getKey())) {
-                annotatedClassname.put(seekingAnnotationMap.remove(entry.getKey()), classname);
+            Iterator<Map.Entry<String, Class<? extends Annotation>>> iterator = seekingAnnotationMap.entrySet().iterator();
+            while (iterator.hasNext()) {
+              Map.Entry<String, Class<? extends Annotation>> classEntry = iterator.next();
+              if (fieldDescriptor.equals(classEntry.getKey())) {
+                annotatedClassname.put(classEntry.getValue(), classname);
+                iterator.remove();
               }
             }
           }

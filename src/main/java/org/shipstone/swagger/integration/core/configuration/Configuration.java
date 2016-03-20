@@ -9,6 +9,10 @@ import static org.shipstone.swagger.integration.core.configuration.DefaultConfig
  */
 public class Configuration {
 
+  private boolean hostSet;
+  private String contextPath;
+  private String contextApiDocPath;
+
   public static Configuration getDefault() {
     return new Configuration(DEFAULT_SWAGGER_CONFIGURATION_FILE, null, DEFAULT_HOST, null, DEFAULT_REST_APPLICATION_ROOT, null, DEFAULT_API_DOC_PATH, DEFAULT_SWAGGER_UI_INDEX, false, true);
   }
@@ -44,7 +48,7 @@ public class Configuration {
   private String restApplicationPath;
 
   /**
-   * Base package REST application - used only if the restApplicationClass was undefined.
+   * Base package REST application - used only if the restApplicationClass was undefined or restApplicationPackageAsRoot set to false.
    */
   private String restApplicationPackage;
 
@@ -131,6 +135,7 @@ public class Configuration {
 
   public void setHost(String host) {
     this.host = host;
+    hostSet = host != null && !"".equals(host.trim());
   }
 
   public Class<?> getRestApplicationClass() {
@@ -205,5 +210,32 @@ public class Configuration {
         ", restApplicationPackageAsRoot=" + restApplicationPackageAsRoot +
         ", restApplicationPackage='" + restApplicationPackage + '\'' +
         '}';
+  }
+
+  public boolean isHostSet() {
+    return hostSet;
+  }
+
+  public void setHostSet(boolean hostSet) {
+    this.hostSet = hostSet;
+  }
+
+  public void setContextPath(String contextPath) {
+    this.contextPath = contextPath;
+  }
+
+  public String getContextPath() {
+    return contextPath;
+  }
+
+  public String getContextApiDocPath() {
+    if (contextApiDocPath == null) {
+      contextApiDocPath = "/" + contextPath + apiDocPath;
+    }
+    return contextApiDocPath;
+  }
+
+  public void setContextApiDocPath(String contextApiDocPath) {
+    this.contextApiDocPath = contextApiDocPath;
   }
 }

@@ -56,6 +56,8 @@ public class AnnotationConfigurationReader extends ConfigurationReader {
         configuration.setRestApplicationPackageAsRoot(swaggerUIConfiguration.restApplicationPackageAsRoot());
         if (configuration.isRestApplicationPackageAsRoot()) {
           configuration.setRestApplicationPackage(configuration.getRestApplicationClass().getPackage().getName());
+        } else {
+          configuration.setRestApplicationPackage(swaggerUIConfiguration.restApplicationPackage());
         }
       } catch (ClassNotFoundException e) {
         configuration.setRestApplicationClass(null);
