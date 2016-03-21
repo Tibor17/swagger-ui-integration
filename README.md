@@ -15,11 +15,11 @@ swagger-ui-integration is a library that allows you to turn at the same time exp
 swagger lib linked : 
 
 * swaggerUI : 2.1.4
-* swagger-core : 1.5.7
+* swagger-core : 1.5.8
 
 demo : [examples how to use swagger-ui-integration lib on github](https://github.com/ptitbob/swagger-ui-integration-test)
 
-Since version 0.6, you can reach the library from [maven central repository](http://mvnrepository.com/artifact/org.shipstone/swagger-ui-integration). 
+Since version 0.8, you can reach the library from [maven central repository](http://mvnrepository.com/artifact/org.shipstone/swagger-ui-integration). 
 
 ###Use Swagger core and Swagger UI in your project.
 
@@ -61,28 +61,20 @@ First add dependency to your JavaEE project :
 
 ```xml
     <dependencies>
-    	 <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
+        ...
         <dependency>
             <groupId>org.shipstone</groupId>
             <artifactId>swagger-ui-integration</artifactId>
             <version>0.8</version>
         </dependency>
+        ...
     </dependencies>
 ```
-Add empty class with the annotations ```@RewriteConfiguration``` **and** **```@SwaggerUIConfiguration```**. Your class **must** extends ```AbstractSwaggerURLRewriter```.
-
+Add empty class with the annotation **```@SwaggerUIConfiguration```**.
 
 ```java
-@RewriteConfiguration
-@SwaggerUIConfiguration(
-    restApplication = RestApplication.class
-)
-public class SwaggerURLRewriter extends AbstractSwaggerURLRewriter {
+@SwaggerUIConfiguration
+public class SwaggerURLRewriter  {
 }
 ```
 Your API REST Application class, no need to do anything else :)
@@ -128,7 +120,10 @@ have fun !
 
 ####ToDo
 
-* [ ] remove org.ocpsoft.rewrite dependencies - version 0.9
-* [ ] use webfragment and ensure compatibility java EE 6 - version 0.9
+* [x] remove org.ocpsoft.rewrite dependencies - version 0.9
+* [x] use webfragment and ensure compatibility java EE 6 - version 1.0-RC1
 * [ ] split the library into 2 sub-module (api & core) - version 1.0+
 * [ ] allow to replace embedded site with a external site - version 1.0+
+* [ ] remove support Java EE 6 and Java 1.7, switch to Java EE 7 and Java 1.8 - version 2.0+
+
+
