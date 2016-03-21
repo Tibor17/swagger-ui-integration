@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.shipstone</groupId>
@@ -44,7 +45,6 @@
         <swagger.version>1.5.7</swagger.version>
         <swagger-ui.version>2.1.4</swagger-ui.version>
         <javax.servlet.version>3.0.1</javax.servlet.version>
-        <jax.ws.rs.version>2.0</jax.ws.rs.version>
         <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/${project.artifactId}</destDir>
     </properties>
@@ -65,6 +65,12 @@
             <groupId>io.swagger</groupId>
             <artifactId>swagger-jaxrs</artifactId>
             <version>${swagger.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -74,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
+            <artifactId>${jax.ws.rs.apiName}</artifactId>
             <version>${jax.ws.rs.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -122,11 +128,13 @@
                         </goals>
                         <configuration>
                             <target>
-                                <unzip src="${project.basedir}/temp/swagger-ui-dist.zip" dest="${project.basedir}/temp/ui/" />
+                                <unzip src="${project.basedir}/temp/swagger-ui-dist.zip"
+                                       dest="${project.basedir}/temp/ui/"/>
                                 <copy todir="${destDir}">
-                                    <fileset dir="${project.basedir}/temp/ui/swagger-ui-${swagger-ui.version}/dist/" includes="**/*" />
+                                    <fileset dir="${project.basedir}/temp/ui/swagger-ui-${swagger-ui.version}/dist/"
+                                             includes="**/*"/>
                                 </copy>
-                                <delete dir="${project.basedir}/temp" includeemptydirs="true" />
+                                <delete dir="${project.basedir}/temp" includeemptydirs="true"/>
                             </target>
                         </configuration>
                     </execution>
@@ -158,6 +166,26 @@
 
 
     <profiles>
+        <profile>
+            <id>jaxrs1</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jax.ws.rs.apiName>jsr311-api</jax.ws.rs.apiName>
+                <jax.ws.rs.version>1.1.1</jax.ws.rs.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>jaxrs2</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <jax.ws.rs.apiName>javax.ws.rs-api</jax.ws.rs.apiName>
+                <jax.ws.rs.version>2.0</jax.ws.rs.version>
+            </properties>
+        </profile>
         <profile>
             <id>checksum</id>
             <activation>
