@@ -25,22 +25,23 @@ Since version 0.8, you can reach the library from [maven central repository](htt
 
 The library provides a number of default values and get 3 levels of configuration.
 
-***Configurations path*** :
+***Configurations path - order of configuration items reading*** :
 
 1. Annotation ```@SwaggerUIConfiguration```
-2. resource Configuration file ```swagger-project.properties``` allow set configuration during build
+2. resource Configuration file ```swagger-project.properties``` allow set configuration during package building.
 3. system configuration file store in system property. The system property'name ***must be*** set in ```systemPropertyForExternalConfigurationFilename ```
 
-***annotation files properties and default values*** : 
+***annotation properties and default values*** : 
 
+* ```active``` : Access to the description of the REST API via Swagger and activate swagger description.
+    * *default value : ```true```*
 * ```configurationFilename``` : Default resource file store swagger-ui-integration configuration
     * *default value : ```swagger-project.properties```*
 * ```systemPropertyForExternalConfigurationFilename``` : property system name storing the full path to the external configuration file for swagger-ui-integration.
     * *default value was empty, if you want a external configuration name, you* ***must set*** *one*.
-* ```restApplicationClass``` : classname for the class use JAS-RS ```@ApplicationPath```
-    * *default value : ```Void.class``` (not assigned)*
-* ```restApplicationPath``` : Base path for REST application - used only if the restApplicationClass was undefined.
-    * *default value : ```/api```*
+* ```host``` : your default host. if it is not assigned, it will be determined in the first call.
+* ```restApplicationPackageAsRoot``` : use the class use JAX-RS ```@ApplicationPath``` package. If false, you must set ```restApplicationPackage```
+    * *default value : ```true```*
 * ```restApplicationPackage``` : Base package REST application - used only if the restApplicationClass was undefined.
     * by default empty, the process take class path from ```@SwaggerUIConfiguration``` annoted class package.
 * ```apiDocPath``` : API documentation sub-path
@@ -48,12 +49,21 @@ The library provides a number of default values and get 3 levels of configuratio
 * ```apiDocIndex``` : resource fully qualified filename for replace default index.html used by.
     * *default value : not fixed - use default swagger-ui-integration index.html (hide url field)*.
     * *see below for more explaination for your own index file*
-* ```active``` : Access to the description of the REST API via Swagger and activate swagger description.
-    * *default value : ```true```*
 
 ***configuration files properties and default values*** : 
 
 All property must used prefixe ```swagger.``` (i.e. ```swagger.apiDocPath```). You can store your swagger properties in overall project configuration file.
+
+* ```swagger.active``` : Access to the description of the REST API via Swagger and activate swagger description.
+* ```swagger.systemPropertyForExternalConfigurationFilename``` : property system name storing the full path to the external configuration file for swagger-ui-integration.
+* ```swagger.host``` : your default host. if it is not assigned, it will be determined in the first call.
+* ```swagger.restApplicationClass``` : class wear ```@ApplicationPath``` JAX-RS annotation.
+* ```swagger.restApplicationPackageAsRoot``` : use the class use JAX-RS ```@ApplicationPath``` package. If false, you must set ```swagger.restApplicationPackage```
+* ```swagger.restApplicationPath``` : Base path for REST application - used only if the restApplicationClass was undefined.
+* ```swagger.restApplicationPackage``` : Base package REST application - used only if the restApplicationClass was undefined.
+* ```swagger.apiDocPath``` : API documentation sub-path
+* ```swagger.apiDocIndex``` : resource fully qualified filename for replace default index.html used by.
+
 
 ***how use it***
 
@@ -121,8 +131,9 @@ have fun !
 ####ToDo
 
 * [x] remove org.ocpsoft.rewrite dependencies - version 0.9
-* [x] use webfragment and ensure compatibility java EE 6 - version 1.0-RC1
-* [ ] split the library into 2 sub-module (api & core) - version 1.0+
+* [x] use webfragment - Version 0.9
+* [x] ensure compatibility java EE 6 - version 1.0-RC1
+* [ ] split the library into 2 sub-module (api & core) (? *useful* ?) - version 1.0+
 * [ ] allow to replace embedded site with a external site - version 1.0+
 * [ ] remove support Java EE 6 and Java 1.7, switch to Java EE 7 and Java 1.8 - version 2.0+
 
