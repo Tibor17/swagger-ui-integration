@@ -42,9 +42,10 @@
         <project.java.version>1.7</project.java.version>
         <javaee.version>7.0</javaee.version>
         <maven.min.version>3.3.0</maven.min.version>
-        <swagger.version>1.5.7</swagger.version>
+        <swagger.version>1.5.8</swagger.version>
         <swagger-ui.version>2.1.4</swagger-ui.version>
         <javax.servlet.version>3.0.1</javax.servlet.version>
+        <slf4j.version>1.7.19</slf4j.version>
         <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
         <destDir>${project.build.outputDirectory}/META-INF/resources/${project.artifactId}</destDir>
     </properties>
@@ -87,7 +88,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.7</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
