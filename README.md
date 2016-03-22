@@ -75,7 +75,7 @@ First add dependency to your JavaEE project :
         <dependency>
             <groupId>org.shipstone</groupId>
             <artifactId>swagger-ui-integration</artifactId>
-            <version>0.8</version>
+            <version>1.0</version>
         </dependency>
         ...
     </dependencies>
