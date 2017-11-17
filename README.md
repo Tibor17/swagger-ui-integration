@@ -8,7 +8,7 @@ Swagger core and Swagger UI integration effortless for Java EE application
 
 ---
 
-###swagger-ui-integration ?
+### swagger-ui-integration ?
 
 swagger-ui-integration is a library that allows you to turn at the same time exposing the description of the REST API of the application via the swagger and offer access a UI (swagger-UI) using descriptive swagger thereof.
 
