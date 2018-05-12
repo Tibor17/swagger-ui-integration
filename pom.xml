@@ -41,8 +41,8 @@
         <project.java.version>1.7</project.java.version>
         <javaee.version>7.0</javaee.version>
         <maven.min.version>3.3.0</maven.min.version>
-        <swagger.version>1.5.8</swagger.version>
-        <swagger-ui.version>2.1.4</swagger-ui.version>
+        <swagger.version>1.5.19</swagger.version>
+        <swagger-ui.version>3.14.1</swagger-ui.version>
         <javax.servlet.version>3.0.1</javax.servlet.version>
         <slf4j.version>1.7.19</slf4j.version>
         <upstream.url>https://github.com/swagger-api/swagger-ui/archive</upstream.url>
