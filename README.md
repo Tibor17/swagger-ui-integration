@@ -14,8 +14,8 @@ swagger-ui-integration is a library that allows you to turn at the same time exp
 
 swagger lib linked : 
 
-* swaggerUI : 2.1.4
-* swagger-core : 1.5.8
+* swaggerUI : 3.14.1 (thx to Tibor17)
+* swagger-core : 1.5.19 (thx to Tibor17)
 
 demo : [examples how to use swagger-ui-integration lib on github](https://github.com/ptitbob/swagger-ui-integration-test)
 
